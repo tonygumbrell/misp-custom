@@ -1,0 +1,44 @@
+version: '2'
+
+networks:
+  misp-network:
+    driver: bridge
+
+services:
+  misp-web:
+    build: misp-web
+    depends_on:
+      - misp-db
+    container_name: misp-web
+    hostname: misp-web
+    image: misp-web:latest
+    restart: always
+    networks:
+      - misp-network
+    links:
+      - misp-db
+    ports:
+      - "80:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Passw0rds123!
+      - MYSQL_MISP_PASSWORD=Passw0rds123!
+      - MYSQL_HOST=misp-db
+      - MISP_ADMIN_EMAIL=admin@admin.test
+      - MISP_ADMIN_PASSPHRASE=Changeme123!
+      - MISP_BASEURL=http:\/\/misp\.test
+      - POSTFIX_RELAY_HOST=relay.fqdn
+      - TIMEZONE=Europe/Brussels
+
+  misp-db:
+    build: 
+      context: misp-db
+      args:
+        MYSQL_MISP_PASSWORD: Passw0rds123!
+    container_name: misp-db
+    hostname: misp-db
+    image: misp-db:latest
+    restart: always
+    networks:
+      - misp-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=Passw0rds123!
