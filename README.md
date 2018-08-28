@@ -1,6 +1,6 @@
 # misp-custom
 
-All images build from https://github.com/MISP/misp-docker and customised to support systems where internet connectivity is limited so pre-built configurations are required.
+All images are built from https://github.com/MISP/misp-docker and customised to support systems where internet connectivity is limited
 
 Build Process.
 
@@ -14,6 +14,8 @@ On a CentOS Base Build:
 6) docker pull tonygumbrell/misp-db:xx
 - Make sure matching versions are used
 - For version descriptions see the Dockerhub repo descriptions.
-7) Import the misp-docker folder
+7) Import the misp-docker folder. 
+8) Edit the docker-compose.yaml file and update the image names
+9) 
 
 
